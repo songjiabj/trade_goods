@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+    <h1>{{ detail.title }}</h1>
+    {# {% for choice in question.choice_set.all %} #}
+        <!--question.choice_set.all 被解释为 Python 代码 question.choice_set.all() ，将会返回一个可迭代的 Choice 对象。不懂-->
+        {#        {% endfor %} #}
+
+    {% if error_message %}
+    <p>
+        <strong>{{ error_message }}</strong>
+    </p>
+    {% endif %}
+
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">  <!--forloop.counter 指示 for 标签已经循环多少次。-->
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label> <!--for 属性命名一个目标表单 id-->
+        <br>
+        {% endfor %}
+    <input type="submit" value="Vote">
+
+    </form>
+</body>
+</html>

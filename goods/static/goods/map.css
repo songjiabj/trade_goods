@@ -1,0 +1,174 @@
+html,body {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+.navbar {
+    padding: 0!important;
+}
+.bg-light {
+    background-color: #f2f2f2!important;
+}
+.navbar a {
+    color: rgba(0,0,0,.5);
+    width: 55px;
+}
+.navbar a.active {
+    color: rgba(0,0,0,.9);
+}
+#map {
+    bottom:0;
+    height:100%;
+    left:320px;
+    position: absolute;
+    right:0;
+}
+.container-left{
+    height:100%;
+    width:320px;
+    position: relative;
+    border-right:1px solid #e7e7e7;
+}
+#content {
+    position: relative;
+}
+ul {
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+img {
+    cursor: pointer;
+}
+.smt_district {
+    color: #a8a6a6;
+    padding-left: 5px;
+}
+
+#search {
+    box-sizing: border-box;
+    height:45px;
+    line-height: 45px;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+#searchText{
+    font-size:14px;
+    height: 25px;
+    width: 220px;
+    border:none;
+    margin-left: 15px;
+}
+
+input:focus {
+    outline:none;
+}
+@media (max-width:767px) {
+    .navbar-nav>li {
+        float: left;
+    }
+    .navbar-nav {
+        margin: 0;
+    }
+    .navbar-nav>li>a {
+        padding:15px;
+    }
+}
+.search_img {
+    display: inline-block;
+    height: 45px;
+    width: 35px;
+    text-align: center;
+}
+.imgbtn {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin: 0 auto;
+}
+.line-search-exchange, .line-search {
+    display: inline-block;
+    vertical-align: middle;
+}
+.line-search p {
+    height: 40px;
+    line-height: 40px;
+    margin:10px 10px;
+    padding-left:5px;
+}
+.line-search p input {
+    height: 30px;
+    border: none;
+    margin-left: 10px;
+    width:180px;
+}
+.navbtn, #edit-ctrl-group {
+    width: 80px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+#navpath {
+    border-bottom: 1px solid #e7e7e7;
+}
+#input_now li{
+    padding-left: 15px;
+}
+#detail ul li {
+    border-bottom: 1px solid #e7e7e7;
+    margin: 0px 40px 0px 15px;
+    padding: 10px 0px;
+}
+#buttons {
+    position: absolute;
+    bottom: 9px;
+    right: 45px;
+    z-index: 2;
+}
+.minemap-popup-close-button {
+    display: none;
+}
+#goodlist {
+    height: calc(100vh - 317px);
+    overflow: auto;
+}
+#goodlist p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#goodlist a {
+    color: #212529;
+    font-size: 12px;
+}
+#goodlist ul li {
+    margin: 0px 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e7e7e7;
+}
+.good-title {
+    color: #28a745;
+    font-size: 14px;
+}
+#goodlist ul li a:hover {
+    text-decoration: none;
+}
+.checkbox_top {
+    font-size: 13px;
+    padding-left: 15px;
+    line-height: 24px;
+}
+.list_cat {
+    display: inline-block;
+    width: 230px;
+    vertical-align: top;
+}
+.list_cat a {
+    padding: 0 8px;
+    text-decoration: none;
+    color: #212529;
+}
+.checked_a {
+    color: #28a745 !important;
+}

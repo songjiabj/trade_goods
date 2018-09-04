@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品列表</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'goods/product.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">商品列表</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse show" id="navbarCollapse" style="">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="../home">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="../map" target="_blank">地图</a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="../product">商品</a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="../mine">我的</a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="搜索商家" aria-label="搜索商家">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        </div>
+    </nav>
+
+    <div class="center-content">
+        <div class="filter-box">
+            <div class="filter-classify">
+                <div class="label">
+                    <label>分类</label>
+                </div>
+                <div class="tags">
+                    <div class="tag-group tag-group-expend">
+                        <div>
+                            <a class="tag tag-solid tag-large" href="javascript:void(0);"><span>全部</span></a>
+                        </div>
+                        <div>
+                            <a class="tag tag-empty " href="http://bj.meituan.com/shenghuo/c21246/"><span>数码产品</span></a>
+                        </div>
+                        <div>
+                            <a class="tag tag-empty " href="http://bj.meituan.com/shenghuo/c20455/"><span>图书</span></a>
+                        </div>
+                        <div>
+                            <a class="tag tag-empty " href="http://bj.meituan.com/shenghuo/c21234/"><span>服鞋包配饰</span></a>
+                        </div>
+                        <div>
+                            <a class="tag tag-empty " href="http://bj.meituan.com/shenghuo/c20112/"><span>乐器玩具</span></a>
+                        </div>
+                        <div>
+                            <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/c20113/"><span>配件设备工具</span></a>
+                        </div>
+                        <div>
+                            <a class="tag tag-empty " href="http://bj.meituan.com/shenghuo/c20196/"><span>车房</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-component">
+                <div class="label">
+                    <label>区域</label>
+                </div>
+                <div class="tags">
+                    <div>
+                        <a class="tag tag-solid tag-large" href="javascript:void(0);"><span>全部</span></a>
+                    </div>
+                    <div class="tag-group tag-group-expend">
+                        <a class="tag tag-expend " href="javascript:void(0);"><span>推荐商圈</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b14/"><span>朝阳区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b17/"><span>海淀区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b20/"><span>丰台区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b16/"><span>西城区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b15/"><span>东城区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b4750/"><span>昌平区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b172/"><span>石景山区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b4751/"><span>通州区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b4752/"><span>大兴区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b708/"><span>顺义区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b710/"><span>房山区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b2074/"><span>密云区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b711/"><span>怀柔区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b2075/"><span>延庆区</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b709/"><span>门头沟</span></a>
+                    </div>
+                    <div>
+                        <a class="tag tag-expend " href="http://bj.meituan.com/shenghuo/b2073/"><span>平谷区</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="common-list">
+        <div class="sort-option">
+            <div class="tag-group tag-group-sort">
+                <div>
+                    <a class="tag tag-empty tag-highlight tag-large" href="http://bj.meituan.com/shenghuo/"><span>智能排序</span></a>
+                </div>
+                <div>
+                    <a class="tag tag-sort tag-sort-up tag-sort-down " href="http://bj.meituan.com/shenghuo/jiagezuidi/"><span>价格排序</span></a>
+                </div>
+                <div>
+                    <a class="tag tag-empty " href="http://bj.meituan.com/shenghuo/renqi/"><span>人气最高</span></a>
+                </div>
+                <div>
+                    <a class="tag tag-empty " href="http://bj.meituan.com/shenghuo/pingjia/"><span>评价最高</span></a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="common-list-main">
+            <div class="abstract-item clearfix">
+                <a class="abstract-pic grey" href="http://www.meituan.com/shenghuo/161104735/" style="width:220px;height:126px" target="_blank">
+                    <span>1</span>
+                    <div><img src="http://p1.meituan.net/wedding/4803839113ae708883fb50a28b4420d1410933.jpg@220w_126h_1e_1c" class="image image-error"></div>
+                </a>
+                <div class="abstract-desc">
+                    <div class="list-item-desc-top">
+                        <a href="http://www.meituan.com/shenghuo/161104735/" target="_blank" class="item-title">瑞思学科英语（世界之花校区）</a>
+                        <div class="item-eval-info clearfix">
+                            <div class="rate-stars">
+                                <ul class="rate-stars-ul rate-stars-dark">
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                </ul>
+                                <ul class="rate-stars-ul rate-stars-light">
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                    <li><i class="iconfont icon-star_icon">&#xe69d;</i></li>
+                                    <li><i class="iconfont icon-star_icon">&#xe6b6;</i></li>
+                                </ul>
+                            </div>
+                            <span>4<!-- -->分</span>
+                            <span class="highlight">0<!-- -->人评论</span>
+                        </div>
+                        <div class="item-site-info clearfix">
+                            <span>学科英语<!-- -->|<!-- -->南苑/东高地</span>
+                            <span title="丰台区久敬庄路世界之花商场2层A39-46">丰台区久敬庄路世界之花商场2层A39-46</span>
+                            <div class="item-site-map"><span>查看地图</span></div>
+                        </div>
+                        <div class="item-price-info"><span>人均 ¥ <!-- -->19203</span></div>
+                        <div class="item-desc-ad"><span>广告</span></div>
+                        <div class="list-item-tag">
+                            <div class="tag-group tag-group-small border"></div>
+                        </div>
+                    </div>
+                    <div class="list-item-desc-bottom">
+                        <div class="item-discount">
+                            <div title="1元/券，3-5岁美式英语主题课">
+                                <img src="./【北京生活服务】生活服务攻略_生活服务推荐-北京美团网_files/af71bbba0c83b6693e9f52645bb1cf3c660.png"><span>1元/券，3-5岁美式英语主题课</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="abstract-item clearfix">
+                <a class="abstract-pic grey" href="http://www.meituan.com/shenghuo/69351405/" style="width:220px;height:126px" target="_blank">
+                    <span>2</span>
+                    <div>
+                        <img src="//p0.meituan.net/joymerchant/-369167588026585459-3564974-1521101061058.jpg@220w_126h_1e_1c" class="image image-error">
+                    </div>
+                </a>
+                <div class="abstract-desc">
+                    <div class="list-item-desc-top">
+                        <a href="http://www.meituan.com/shenghuo/69351405/" target="_blank" class="item-title">学院风摄影（传媒店）</a>
+                        <div class="item-eval-info clearfix">
+                            <div class="rate-stars">
+                                <ul class="rate-stars-ul rate-stars-dark">
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                </ul>
+                                <ul class="rate-stars-ul rate-stars-light" style="width:100%">
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                    <li><i class="iconfont icon-star_icon"></i></li>
+                                </ul>
+                            </div>
+                            <span>5<!-- -->分</span>
+                            <span class="highlight">1058<!-- -->人评论</span>
+                        </div>
+                        <div class="item-site-info clearfix">
+                            <span>证件照<!-- -->|<!-- -->传媒大学</span>
+                            <span title="朝阳区朝阳路中国传媒大学北门正对面聚福苑3号楼4单元302室">朝阳区朝阳路中国传媒大学北门正对面聚福苑3号楼4单元302室</span>
+                            <div class="item-site-map">
+                                <span>查看地图</span></div>
+                        </div>
+                        <div class="item-price-info">
+                            <span>人均 ¥ <!-- -->109</span> </div>
+                        <div class="list-item-tag">
+                            <div class="tag-group tag-group-small border">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-item-desc-bottom">
+                        <div class="item-discount">
+                            <div title="79元/券，高端精修证件/签证/简历照，169元/券，高端形象照+证件照套系，129元/券，高端结婚登记照套系，109元/券，证件照双背景拍摄，高端商业形象照1套128元">
+                                <img src="./【北京生活服务】生活服务攻略_生活服务推荐-北京美团网_files/af71bbba0c83b6693e9f52645bb1cf3c660.png">
+                                <span>79元/券，高端精修证件/签证/简历照，169元/券，高端形象照+证件照套系，129元/券，高端结婚登记照套系，109元/券，证件照双背景拍摄，高端商业形象照1套128元</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</body>
+</html>

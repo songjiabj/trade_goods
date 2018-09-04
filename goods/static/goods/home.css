@@ -1,0 +1,34 @@
+.text-center {
+    text-align: center;
+}
+h1 {
+    line-height: 1.3;
+    font-family: "STXingkai","STXinwei","SimHei";
+    font-size: 211px;
+    margin: 0;
+}
+a {
+    color: inherit;
+}
+a:link, a:hover, a:visited,a:active {
+    text-decoration: none;
+}
+.mb-lg {
+    margin:60px auto;
+}
+img {
+    height:80%;
+    width:80%;
+}
+nav {
+    padding: 0!important;
+}
+.bg-light {
+    background-color: #f2f2f2!important;
+}
+nav a {
+    color: rgba(0,0,0,.5);
+}
+nav a.active {
+    color: rgba(0,0,0,.9);
+}
