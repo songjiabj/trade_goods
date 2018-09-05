@@ -98,6 +98,8 @@ function showgoodmarker() {
     }
 }
 
+
+
 /**
  * 添加导航菜单 ,可选值有  top-left  top-right bottom-left bottom-right
  */
@@ -438,6 +440,37 @@ $("#publish").click(function(){
     $("input[name='coordinate_y']").val(coordinate_y);
 });
 
+/** 表单上传文件功能*/
+$("#iconfont_file_1").click(function () {
+    $("#customFile_1").trigger("click");
+    $("#customFile_1").change(function () {
+        $("input[name='imgage_1']").val($("#customFile_1").val());
+    })
+});
+$("#iconfont_file_2").click(function () {
+    $("#customFile_2").trigger("click");
+    $("#customFile_2").change(function () {
+        $("input[name='imgage_2']").val($("#customFile_2").val());
+    })
+});
+$("#iconfont_file_3").click(function () {
+    $("#customFile_3").trigger("click");
+    $("#customFile_3").change(function () {
+        $("input[name='imgage_3']").val($("#customFile_3").val());
+    })
+});
+/**显示商品详情card*/
+$(".good_list").each(function () {
+    $(this).click(function () {
+        if($(this).find('.card').first().css("display")=="none") {
+            $('.card').hide();
+        }else {
+            $('.card').hide();
+            $(this).find('.card').first().show();
+        }
+        $(this).find('.card').first().toggle();
+    });
+});
 
 /** 页脚button*/
 document.getElementById("hide-listings").onclick=function(){

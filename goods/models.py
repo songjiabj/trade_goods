@@ -61,6 +61,9 @@ class Goods_detail(models.Model):
     phone = models.CharField(max_length=20)
     pub_date = models.DateTimeField(default=django.utils.timezone.now)
     address = models.CharField(max_length=100)
+    img_1 = models.ImageField(default="C:/Users/acer/Pictures/001.jpg", upload_to="img_upload")
+    img_2 = models.ImageField(default="C:/Users/acer/Pictures/001.jpg", upload_to="img_upload")
+    img_3 = models.ImageField(default="C:/Users/acer/Pictures/001.jpg", upload_to="img_upload")
     coordinate_x = models.FloatField()
     coordinate_y = models.FloatField()
 
