@@ -130,6 +130,7 @@ input:focus {
 }
 #goodlist {
     height: calc(100vh - 317px);
+    margin-top: 5px;
     overflow: auto;
 }
 #goodlist p {
@@ -197,4 +198,18 @@ input:focus {
     left: 320px;
     z-index: 3;
     width: 500px!important;
+}
+.good_list p {
+    font-size: 14px;
+}
+.price {
+    color: #f53731;
+    font-size: 12px;
+    padding-left: 5px;
+}
+.price_large {
+    font-size: 18px;
+}
+.card-title {
+    text-align: center;
 }

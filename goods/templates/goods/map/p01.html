@@ -23,14 +23,14 @@
                 <a class="nav-link" href="http://127.0.0.1:8000/goods/map" target="_blank">地图</a>
                 </li>
                 <li class="nav-item active">
-                <a class="nav-link" href="http://127.0.0.1:8000/goods/product">商品</a>
+                <a class="nav-link" href="goods/product">商品</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)">我的</a>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0" method="GET" action="../product">
-                <input class="form-control mr-sm-2" type="text" placeholder="搜索商品" name="search">
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="搜索商家" aria-label="搜索商家">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -43,50 +43,50 @@
                     <label>商品分类</label>
                 </div>
                 <div class="tags">
-                    <div class="tag-group tag-group-expend ">
+                    <div class="tag-group tag-group-expend" id="list_cat_1">
                         <div>
-                            <a class="tag tag-solid tag-large" id="c00" href="javascript:void(0)"><span class= 'checked_a'>全部</span></a>
+                            <a class="tag tag-solid tag-large" id="c00"><span>全部</span></a>
                         </div>
                         <div>
-                            <a class="tag tag-empty " href="http://127.0.0.1:8000/goods/product/c01" id="c01"><span>数码产品</span></a>
+                            <a class="tag tag-empty " id="c01"><span>数码产品</span></a>
                         </div>
                         <div>
-                            <a class="tag tag-empty " href="http://127.0.0.1:8000/goods/product/c02" id="c02"><span>图书</span></a>
+                            <a class="tag tag-empty " id="c02"><span>图书</span></a>
                         </div>
                         <div>
-                            <a class="tag tag-empty " href="http://127.0.0.1:8000/goods/product/c03" id="c03"><span>服鞋包配饰</span></a>
+                            <a class="tag tag-empty " id="c03"><span>服鞋包配饰</span></a>
                         </div>
                         <div>
-                            <a class="tag tag-empty " href="http://127.0.0.1:8000/goods/product/c04" id="c04"><span>乐器玩具</span></a>
+                            <a class="tag tag-empty " id="c04"><span>乐器玩具</span></a>
                         </div>
                         <div>
-                            <a class="tag tag-expend " href="http://127.0.0.1:8000/goods/product/c05" id="c05"><span>配件设备工具</span></a>
+                            <a class="tag tag-expend " id="c05"><span>配件设备工具</span></a>
                         </div>
                         <div>
-                            <a class="tag tag-empty " href="http://127.0.0.1:8000/goods/product/c06" id="c06"><span>车房</span></a>
+                            <a class="tag tag-empty " id="c06"><span>车房</span></a>
                         </div>
                         <div>
-                            <a class="tag tag-empty " href="http://127.0.0.1:8000/goods/product/c07" id="c07"><span>其他</span></a>
+                            <a class="tag tag-empty " id="c07"><span>其他</span></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="filter-component">
+            <div class="filter-component" id="list_cat_2">
                 <div class="label">
                     <label>交易类型</label>
                 </div>
                 <div class="tags">
                     <div>
-                        <a class="tag tag-solid tag-large" id="b00" href="javascript:void(0)"><span class = 'checked_a'>全部</span></a>
+                        <a class="tag tag-solid tag-large" id="b00"><span>全部</span></a>
                     </div>
                     <div>
-                        <a class="tag tag-expend " href="http://127.0.0.1:8000/goods/product/b01" id="b01"><span>租</span></a>
+                        <a class="tag tag-expend " id="b01"><span>租</span></a>
                     </div>
                     <div>
-                        <a class="tag tag-expend " href="http://127.0.0.1:8000/goods/product/b02" id="b02"><span>卖</span></a>
+                        <a class="tag tag-expend " id="b02"><span>卖</span></a>
                     </div>
                     <div>
-                        <a class="tag tag-expend " href="http://127.0.0.1:8000/goods/product/b03" id="b03"><span>送</span></a>
+                        <a class="tag tag-expend " id="b03"><span>送</span></a>
                     </div>
                 </div>
             </div>
@@ -206,6 +206,71 @@
                 $("#zoom").remove();
             });
         });*/
+        let c01="c01";
+        let c02="c02";
+        let c03="c03";
+        let c04="c04";
+        let c05="c05";
+        let c06="c06";
+        let c07="c07";
+        let b01="b01";
+        let b02="b02";
+        let b03="b03";
+        let c00="c00";
+        let b00="b00";
+
+        let cat_list_1 = document.getElementById("list_cat_1");
+        let cat_list_2 = document.getElementById("list_cat_2");
+        let a_list_1 = cat_list_1.getElementsByTagName("a");
+        let a_list_2 = cat_list_2.getElementsByTagName("a");
+        let a_cat_1;
+        let a_cat_2;
+        let cat_text;
+        {% if cat_text.l_cat %}
+            a_cat_1={{ cat_text.cat }};
+            a_cat_2={{ cat_text.l_cat }};
+        {% else %}
+            cat_text={{ cat_text }};
+            if(cat_text.substring(0,1)=="c"){
+                a_cat_1=cat_text;
+                a_cat_2="b00";
+            }
+            else {
+                a_cat_2=cat_text;
+                a_cat_1="c00";
+            }
+        {% endif %}
+        document.getElementById(a_cat_1).className="checked_a";
+        document.getElementById(a_cat_2).className="checked_a";
+
+        for(let j=0;j<a_list_1.length;j++) {
+            let a_id = a_list_1[j].id;
+            if(a_id=="c00"){
+                a_id = '';
+            }
+            if(a_cat_2=="b00") {
+                a_cat_2 = '';
+            }
+            if (a_id=='') {
+                a_list_1[j].href="http://127.0.0.1:8000/goods/product"+a_id+"/"+a_cat_2;
+            }
+            else
+                a_list_1[j].href="http://127.0.0.1:8000/goods/product/"+a_id+"/"+a_cat_2;
+        }
+        for(let j=0;j<a_list_2.length;j++) {
+            let a_id = a_list_2[j].id;
+            if(a_id=="b00"){
+                a_id = '';
+            }
+            if(a_cat_1=="c00") {
+                a_cat_1 = '';
+            }
+            if (a_cat_1=='') {
+                a_list_2[j].href = "http://127.0.0.1:8000/goods/product" + a_cat_1 + "/"+ a_id;
+            }
+            else
+                a_list_2[j].href = "http://127.0.0.1:8000/goods/product/" + a_cat_1 + "/"+ a_id;
+        }
 
     </script>
 

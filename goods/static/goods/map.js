@@ -74,6 +74,8 @@ function showgoodmarker() {
         {
             case "b01":
                 good_list[i].getElementsByClassName('large-category')[0].innerText="租";
+                good_list[i].getElementsByClassName("price")[0].innerText=good_list[i].getElementsByClassName("price")[0].innerText+"元/天";
+                good_list[i].getElementsByClassName("price")[1].innerText=good_list[i].getElementsByClassName("price")[1].innerText+"元/天";
                 break;
             case "b02":
                 good_list[i].getElementsByClassName('large-category')[0].innerText="卖";
@@ -445,12 +447,18 @@ $("#iconfont_file_1").click(function () {
     $("#customFile_1").trigger("click");
     $("#customFile_1").change(function () {
         $("input[name='imgage_1']").val($("#customFile_1").val());
+        if($("input[name='imgage_1']").val()){
+            $("#img_up_2").show();
+        }
     })
 });
 $("#iconfont_file_2").click(function () {
     $("#customFile_2").trigger("click");
     $("#customFile_2").change(function () {
         $("input[name='imgage_2']").val($("#customFile_2").val());
+        if($("input[name='imgage_2']").val()){
+            $("#img_up_3").show();
+        }
     })
 });
 $("#iconfont_file_3").click(function () {
@@ -460,17 +468,25 @@ $("#iconfont_file_3").click(function () {
     })
 });
 /**显示商品详情card*/
-$(".good_list").each(function () {
+$(".good_general").each(function () {
+    $(this).mouseover(function () {
+        $(this).parent().css("background-color","rgb(243,243,243)");
+    });
+    $(this).mouseout(function () {
+        $(this).parent().css("background-color","#fff");
+    });
     $(this).click(function () {
-        if($(this).find('.card').first().css("display")=="none") {
+        if($(this).parent().find('.card').first().css("display")=="none") {
             $('.card').hide();
         }else {
             $('.card').hide();
-            $(this).find('.card').first().show();
+            $(this).parent().find('.card').first().show();
         }
-        $(this).find('.card').first().toggle();
+        $(this).parent().find('.card').first().toggle();
     });
 });
+
+
 
 /** 页脚button*/
 document.getElementById("hide-listings").onclick=function(){
@@ -489,4 +505,3 @@ function toggle(id){
         map.setStyle("http://www.minedata.cn/service/solu/style/id/"+id);
     }
 } 
-

@@ -15,26 +15,15 @@
 }
 .tags div,.tag-group div{
     display: inline-block;
+    margin: 5px;
 }
 .tags div a,.tag-group div a {
     color: #333;
-    font-size: 14px;
+    font-size: 16px;
+    padding: 0 5px;
 }
 a:hover {
     text-decoration: none;
-}
-.tag-large span {
-    color: #28a745;
-}
-@media (min-width: 768px) {
-    .center-content,.common-list-main {
-        width: 930px;
-    }
-}
-@media (max-width: 767px) {
-    .center-content,.common-list-main {
-        width: 495px;
-    }
 }
 
 .sort-option {
@@ -57,22 +46,6 @@ a:hover {
     list-style: none;
     padding: 0 2px;
     display: inline-block;
-}
-@font-face {
-  font-family: 'iconfont';  /* project id 812780 */
-  src: url('//at.alicdn.com/t/font_812780_dt67itywsas.eot');
-  src: url('//at.alicdn.com/t/font_812780_dt67itywsas.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_812780_dt67itywsas.woff') format('woff'),
-  url('//at.alicdn.com/t/font_812780_dt67itywsas.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_812780_dt67itywsas.svg#iconfont') format('svg');
-}
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
-    -moz-osx-font-smoothing: grayscale;
 }
 .rate-stars-light {
     color: #ff7f27;
@@ -100,4 +73,53 @@ a:hover {
     margin-left: 10px;
     color: #333;
     font-size: 16px;
+}
+
+.good_list {
+    display: inline-block;
+    text-decoration: none;
+    height: 540px;
+    margin: 10px;
+}
+.good_list p {
+    font-size: 14px;
+}
+.carousel-item img {
+    height: 222px;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 812780 */
+  src: url('//at.alicdn.com/t/font_812780_nxtk78z2axh.eot');
+  src: url('//at.alicdn.com/t/font_812780_nxtk78z2axh.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_812780_nxtk78z2axh.woff') format('woff'),
+  url('//at.alicdn.com/t/font_812780_nxtk78z2axh.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_812780_nxtk78z2axh.svg#iconfont') format('svg');
+}
+.iconfont {
+    font-family:"iconfont" !important;
+    font-size:26px;font-style:normal;
+    line-height: 62px;
+    padding-left: 15px;
+    cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.price {
+    color: #f53731;
+}
+#zoom {
+    height: 80%;
+    width: 80%;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    z-index: 100;
+    background-color: #0ECAC7;
+}
+.checked_a {
+    color: #28a745 !important;
+}
+#goodlist {
+    border-bottom: none;
 }
