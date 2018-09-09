@@ -25,6 +25,7 @@ $("#navarrow").click(function(){
     }
     $("#input_now").empty();
     $("#detail").empty();
+    $("#route_detail").empty();
 });
 
 $(".line-search-exchange").click(function(){
@@ -100,15 +101,6 @@ function showgoodmarker() {
     }
 }
 
-
-
-/**
- * 添加导航菜单 ,可选值有  top-left  top-right bottom-left bottom-right
- */
-map.addControl(new minemap.Navigation(),"bottom-right");
-map.addControl(new minemap.Scale(),"top-right");
-
-
 /**实时识别输入框信息 */
 $(".input_it").bind("input propertychange",function(event){
     let input_id=$(this).attr("id");
@@ -151,6 +143,7 @@ $(".input_it").bind("input propertychange",function(event){
     else {
         $("#input_now").empty();
         $("#detail").empty();
+        $("#route_detail").empty();
     }
 });
 
@@ -248,6 +241,7 @@ searchbtn.onclick=function(){
     $("#input_now").empty();
     $("#detail").empty();
     $("#navpath").hide();
+    $("#route_detail").empty();
     map.removeMarkers();
     if(detail.childNodes.length>0) {
         detail.removeChild(detail.childNodes[0]);
@@ -353,7 +347,8 @@ $(".navbtn").click(function(){
     let coordinates_from;
     let coordinates_to;
     let click_btn=$(this).attr('id');
-    
+    map.removeMarkers();
+    $("#route_detail").find("ul").remove();
     minemap.service.queryAllSearchResult('110000',text_from,1,10,function(error,results){  
         let obj=JSON.parse(JSON.stringify(results));
         coordinates_from=obj.data.rows[0].geom_display.coordinates;
@@ -364,16 +359,123 @@ $(".navbtn").click(function(){
                 minemap.service.queryRouteBusResult2('110000',coordinates_from.toString(),coordinates_to.toString(),0,1,0,function(error,results) {
                     let obj=JSON.parse(JSON.stringify(results));
                     if(obj.data.rows.length>0) {
-                        let routelatlons_value='';
-                        for(let i in obj.data.rows[0].routelatlons) {
-                            routelatlons_value+=obj.data.rows[0].routelatlons[i].value;
+                        //左侧显示导航方案
+                        $("#route_detail").append("<ul id='route_ul'></ul>");
+                        for(let i in obj.data.rows) {
+                            let id = obj.data.rows[i].memId;
+                            let routecenter = obj.data.rows[i].routecenter;
+                            let texiCost = obj.data.rows[i].texiCost
+                            let time = obj.data.rows[i].time;//时间
+                            let distance = obj.data.rows[i].distance;//路程
+                            let parts_route = obj.data.rows[i].station.split(":");
+                            locations=[];
+                            let start_station_names=[];
+                            for(let j in parts_route) {
+                                let pass_stations = parts_route[j].split("\",\"");
+                                let start_station_name = pass_stations[0].split(";")[0].substring(2);
+                                let start_station_position = pass_stations[0].split(";")[1];
+                                start_station_names.push(start_station_name);
+                            }
+                            let end_station = parts_route[parts_route.length-1].split("\",\"")
+                            let end_station_name = end_station[end_station.length-1].split(";")[0];
+                            start_station_names.push(end_station_name);
+                            $("#route_ul").append("<li class='unactive' id="+id+"><h3 style='font-size:16px;color:#28a745;'></h3><h4 style='font-size:14px;'></h4><p style='margin-bottom: 0px;'>"+time+"分钟("+distance+"公里)"+"</p></li>");
+                            //for (let i in start_station_names) {
+                                //$("#"+id).find("h3").first().append("<span>"+start_station_names[i]+"</span><span>&nbsp;&gt;&nbsp;</span>");
+                            //}
+                            let bus = obj.data.rows[i].linedetails;
+                            let bus_names=[];
+                            for(let i in bus) {
+                                let bus_name = bus[i].shortname;
+                                bus_names.push(bus_name);
+                            }
+                            for(let i in bus_names) {
+                                $("#"+id).find("h3").first().append("<span>"+bus_names[i]+"</span><span>&nbsp;&gt;&nbsp;</span>");
+                            }
+                            for (let i in start_station_names) {
+                                if(i==0) {
+                                    $("#"+id).find("h4").first().append("<span>"+start_station_names[i]+"(上车)</span><span>&nbsp;&gt;&nbsp;</span>");
+                                }
+                                else if(i==start_station_names.length-1) {
+                                    $("#"+id).find("h4").first().append("<span>"+start_station_names[i]+"(下车)</span><span>&nbsp;&gt;&nbsp;</span>");
+                                }
+                                else {
+                                    $("#"+id).find("h4").first().append("<span>"+start_station_names[i]+"(换乘)&nbsp;&gt;&nbsp;</span>");
+                                }
+                            }
+                            $("h3 span").last().remove();
+                            $("h4 span").last().remove();
                         }
-                        let routelatons=routelatlons_value.split(";");
-                        let routelatons_final=[];
-                        for(let i in routelatons) {
-                            routelatons_final.push(routelatons[i].split(","));
-                        }
-                        showNavLine(routelatons_final);
+
+                        //地图添加导航路线
+                        $("#route_ul li").mouseover(function () {
+                            $(this).css({"background":"#f3f3f3","cursor":"pointer"});
+                            $("#route_ul li").attr("class","unactive");
+                            $(this).attr("class","active");
+                            for(let i in obj.data.rows) {
+                                let routelatlons_value='';
+                                for(let j in obj.data.rows[i].routelatlons) {
+                                    routelatlons_value+=obj.data.rows[i].routelatlons[j].value;
+                                }
+                                let routelatons=routelatlons_value.split(";");
+                                let routelatons_final=[];
+                                let id = obj.data.rows[i].memId;
+                                for(let n in routelatons) {
+                                    routelatons_final.push(routelatons[n].split(","));
+                                }
+                                if($("#"+id).attr("class")=="active") {
+                                    showNavLine(routelatons_final,i,"active");
+                                }
+                                else {
+                                    showNavLine(routelatons_final,i,"unactive");
+                                }
+                            }
+                        });
+                        $("#route_ul li").mouseout(function () {
+                            $(this).css({"background":"#fff","cursor":"auto"});
+                        });
+                        $("#route_ul li").mouseover(function () {
+                            $(this).css({"background":"#f3f3f3","cursor":"pointer"});
+                        });
+                        $("#route_ul li").click(function () {
+                            $("#route_ul li").attr("class","unactive");
+                            $(this).attr("class","active");
+
+                            map.removeMarkers();
+                            for(let n in $("#route_ul li").length) {
+                                map.removeLayer("navline"+(n+1));
+                                map.removeSource("navlineSource"+(n+1));
+                            }
+                            let routelatlons_value='';
+                            let i=$(this).index();
+                            for(let j in obj.data.rows[i].routelatlons) {
+                                routelatlons_value+=obj.data.rows[i].routelatlons[j].value;
+                            }
+                            let routelatons=routelatlons_value.split(";");
+                            let routelatons_final=[];
+                            let id = obj.data.rows[i].memId;
+                            for(let n in routelatons) {
+                                routelatons_final.push(routelatons[n].split(","));
+                            }
+                            showNavLine(routelatons_final,i,"active");
+
+                            let parts_route = obj.data.rows[i].station.split(":");
+                            locations=[];
+                            for(let j in parts_route) {
+                                let pass_stations = parts_route[j].split("\",\"");
+                                let start_station_name = pass_stations[0].split(";")[0].substring(2);
+                                let start_station_position = pass_stations[0].split(";")[1];
+                                locations.push({id: id+j, title: start_station_name, loc: start_station_position.split(',')});
+                            }
+                            let end_station = parts_route[parts_route.length-1].split("\",\"")
+                            let end_station_name = end_station[end_station.length-1].split(";")[0];
+                            let end_station_position = end_station[end_station.length-1].split(";")[1].split("\"")[0];
+                            locations.push({id: id+'end', title: end_station_name, loc: end_station_position.split(',')});
+                            let markerList=[];
+                            map.addMarkers(showMarkers(markerList));
+                        });
+                        $("#route_ul li").first().mouseover();
+                        $("#route_ul li").first().click();
                     }
                 });
             }
@@ -391,29 +493,28 @@ $(".navbtn").click(function(){
                         for(let i in routelatons) {
                             routelatons_final.push(routelatons[i].split(","));
                         }
-                        showNavLine(routelatons_final);
+                        //showNavLine(routelatons_final);
                     }
                 });
             }
-        });
 
+        });
     });
-        
 });
 
-function showNavLine(routelatons_final){
-    if(map.getLayer("navline")) {
-        map.removeLayer("navline");
-        map.removeSource("navlineSource");
+/**地图显示导航路线*/
+function showNavLine(routelatons_final,num_line,active){
+    if(map.getLayer("navline"+num_line)) {
+        map.removeLayer("navline"+num_line);
+        map.removeSource("navlineSource"+num_line);
     }
-    
+
     for(let n in routelatons_final) {
         for(let j in routelatons_final[n]) {
             routelatons_final[n][j]=parseFloat(routelatons_final[n][j]);
         }
     }
-    
-    map.addSource("navlineSource", {
+    map.addSource("navlineSource"+num_line, {
         "type": "geojson",
         "data": {
             "type": "Feature",
@@ -424,16 +525,32 @@ function showNavLine(routelatons_final){
             }
         }
     });
-
-    map.addLayer({
-        "id": "navline",
-        "type": "line",
-        "source": "navlineSource",
-        "paint": {
-            "line-color": "#006df0",
-            "line-width": 5
-        }
-    });
+    if(active == "active") {
+        map.addLayer({
+            "id": "navline"+num_line,
+            "type": "line",
+            "source": "navlineSource"+num_line,
+            "layout": {"visibility":"visible","line-cap":"round"},
+            "paint": {
+                "line-color": "#006df0",
+                "line-width": 5,
+                "line-opacity": 1
+            }
+        });
+    }
+    else {
+        map.addLayer({
+            "id": "navline"+num_line,
+            "type": "line",
+            "source": "navlineSource"+num_line,
+            "layout": {"visibility":"visible","line-cap":"round"},
+            "paint": {
+                "line-color": "#38d7f0",
+                "line-width": 5,
+                "line-opacity": 0.5
+            }
+        });
+    }
 }
 
 
@@ -487,6 +604,11 @@ $(".good_general").each(function () {
 });
 
 
+/**
+ * 添加导航菜单 ,可选值有  top-left  top-right bottom-left bottom-right
+ */
+map.addControl(new minemap.Navigation(),"bottom-right");
+map.addControl(new minemap.Scale(),"top-right");
 
 /** 页脚button*/
 document.getElementById("hide-listings").onclick=function(){

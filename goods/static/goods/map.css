@@ -114,7 +114,7 @@ input:focus {
 #input_now li{
     padding-left: 15px;
 }
-#detail ul li {
+#detail ul li,#route_detail ul li {
     border-bottom: 1px solid #e7e7e7;
     margin: 0px 40px 0px 15px;
     padding: 10px 0px;
